@@ -15,4 +15,5 @@ pipelines:
             - name: repo_res
         execution:
           onExecute:
+            - cd $res_repo_res_path
             - docker buildx build -t test1 --load .
