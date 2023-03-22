@@ -2,7 +2,7 @@ resources:
   - name: repo_res
     type: GitRepo
     configuration:
-      gitProvider: myGitIntegration
+      gitProvider: Github
       path: harshkumar1/test_repo
       branches:
         include: *
