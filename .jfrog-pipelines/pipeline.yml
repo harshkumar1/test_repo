@@ -16,4 +16,5 @@ pipelines:
         execution:
           onExecute:
             - cd $res_repo_res_resourcePath
+            - pwd
             - docker buildx build -t test1 --load .
