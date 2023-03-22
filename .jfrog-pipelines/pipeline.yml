@@ -18,4 +18,4 @@ pipelines:
             - cd $res_repo_res_resourcePath
             - pwd
             - ls
-            - docker build -t test1 --load .
+            - docker build .
