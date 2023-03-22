@@ -1,0 +1,20 @@
+resources:
+  - name: repo_res
+    type: GitRepo
+    configuration:
+      gitProvider: myGitIntegration
+      path: harshkumar1/test_repo
+      branches:
+        include: *
+
+pipelines:
+  - name: test_repo
+    steps:
+      - name: docker_build_bash
+        type: Bash
+        configuration:
+          inputResources:
+            - name: repo_res
+        execution:
+          onExecute:
+            - docker buildx build -t test1 --load .
