@@ -1,7 +1,6 @@
 # Base image
 FROM node:18
 
-COPY surefile-reports/ .
+LABEL testDocker=test
 
-# Start the server using the production build
-CMD [ "echo", "hi" ]
+COPY ./surefire-reports/ /tmp/surefire-reports/
