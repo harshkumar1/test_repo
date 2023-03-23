@@ -16,6 +16,5 @@ pipelines:
         execution:
           onExecute:
             - cd $res_repo_res_resourcePath
-            - pwd
-            - ls
             - docker build .
+            - docker images
