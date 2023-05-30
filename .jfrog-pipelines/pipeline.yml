@@ -31,11 +31,11 @@ pipelines:
           #  - name: merge_files
           inputResources:
             - name: repo_res
-          targetPath: generic/TEST-com.jfrogpipe.demo.AppTest.${run_number}.xml
+          targetPath: example-repo-local/TEST-com.jfrogpipe.demo.AppTest.${run_number}.xml
           sourcePath: $res_repo_res_resourcePath/test-within-docker/surefire-reports/TEST-com.jfrogpipe.demo.AppTest.xml
           regExp: true
           integrations:
-            - name: iotics_docker
+            - name: hk_artifactory
           execution:
             onStart:
               - echo "Uploading..."
