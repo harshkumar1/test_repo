@@ -2,24 +2,44 @@ resources:
   - name: repo_res
     type: GitRepo
     configuration:
-      gitProvider: Github
+      gitProvider: hk_github
       path: harshkumar1/test_repo
 
 pipelines:
   - name: test_repo
     steps:
-      - name: docker_build_bash
-        type: Bash
+    #  - name: docker_build_bash
+    #    type: Bash
+    #    configuration:
+    #      inputResources:
+    #        - name: repo_res
+    #    execution:
+    #      onExecute:
+    #        - cd $res_repo_res_resourcePath
+    #        - docker build -f ./test-within-docker/Dockerfile .
+    #        - id=$(docker images --filter "label=testDocker" -q)
+    #        - docker create --name testcontainer $id
+    #        - docker cp testcontainer:/tmp/surefire-reports ./testresults
+    #        - save_tests ./testresults
+    #        - docker rm testcontainer
+    #        - docker rmi $id
+      - name: upload_result
+        type: UploadArtifact
         configuration:
+          #affinityGroup: group
+          #inputSteps:
+          #  - name: merge_files
           inputResources:
             - name: repo_res
-        execution:
-          onExecute:
-            - cd $res_repo_res_resourcePath
-            - docker build -f ./test-within-docker/Dockerfile .
-            - id=$(docker images --filter "label=testDocker" -q)
-            - docker create --name testcontainer $id
-            - docker cp testcontainer:/tmp/surefire-reports ./testresults
-            - save_tests ./testresults
-            - docker rm testcontainer
-            - docker rmi $id
+          targetPath: generic/TEST-com.jfrogpipe.demo.AppTest.${run_number}.xml
+          sourcePath: $res_repo_res_resourcePath/test-within-docker/surefire-reports/TEST-com.jfrogpipe.demo.AppTest.xml
+          regExp: true
+          integrations:
+            - name: iotics_docker
+          execution:
+            onStart:
+              - echo "Uploading..."
+            onSuccess:
+              - echo "Uploaded"
+            onFailure:
+              - echo "Failed to upload"
