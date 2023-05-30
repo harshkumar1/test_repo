@@ -36,10 +36,10 @@ pipelines:
           regExp: true
           integrations:
             - name: hk_artifactory
-          execution:
-            onStart:
-              - echo "Uploading..."
-            onSuccess:
-              - echo "Uploaded"
-            onFailure:
-              - echo "Failed to upload"
+        execution:
+          onStart:
+            - echo "Uploading..."
+          onSuccess:
+            - echo "Uploaded"
+          onFailure:
+            - echo "Failed to upload"
