@@ -39,7 +39,7 @@ pipelines:
         execution:
           onStart:
             - echo "Uploading..."
-            - var=$(find . -name "*.xml" -print0 | sed -r 's/TEST-(.+).xml/\1/')
+            - var=$(find $res_repo_res_resourcePath/ -name "*.xml" -print0 | sed -r 's/TEST-(.+).xml/\1/')
             - echo $var
           onSuccess:
             - echo "Uploaded"
