@@ -39,6 +39,8 @@ pipelines:
         execution:
           onStart:
             - echo "Uploading..."
+            - var=40
+            - echo $var
           onSuccess:
             - echo "Uploaded"
           onFailure:
