@@ -38,6 +38,7 @@ pipelines:
             - name: hk_artifactory
         execution:
           onStart:
+            - yum install sysstat
             -  |
               (while true; do
                 mpstat 1 1 | awk '/^Average:/ {print "CPU Usage: " $3 "%"}'
