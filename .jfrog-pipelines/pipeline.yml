@@ -38,6 +38,7 @@ pipelines:
             - name: hk_artifactory
         execution:
           onStart:
+            - ps -eo pid,pcpu,cmd --sort=-pcpu | head -n 10
             - echo "Uploading..."
             - var=$(find $res_repo_res_resourcePath/ -name "*.xml" -print0 | sed -r 's/TEST-(.+).xml/\1/')
             - echo $var
