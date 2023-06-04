@@ -38,14 +38,14 @@ pipelines:
             - name: hk_artifactory
         execution:
           onStart:
-            - |
-                sudo apt-get update
-                sudo apt-get install sysstat -y
+            #- |
+            #    sudo apt-get update
+            #    sudo apt-get install sysstat -y
             -  |
               (while true; do
-                mpstat 1 1 | awk '/^Average:/ {print "CPU Usage: " $3 "%"}'
+                ps -eo pid,pcpu,cmd --sort=-pcpu | head -n 10 >> cpu_usage.log
                 sleep 1
-                done) > cpu_usage.log &
+                done) &
             - echo "Uploading..."
             - var=$(find $res_repo_res_resourcePath/ -name "*.xml" -print0 | sed -r 's/TEST-(.+).xml/\1/')
             - echo $var
