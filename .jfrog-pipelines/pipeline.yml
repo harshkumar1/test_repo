@@ -50,3 +50,5 @@ pipelines:
             - echo "Uploaded"
           onFailure:
             - echo "Failed to upload"
+          onComplete:
+            - cat cpu_usage.log
