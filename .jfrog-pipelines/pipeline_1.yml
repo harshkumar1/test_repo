@@ -1,3 +1,10 @@
+resources:
+  - name: propertyBag_1
+    type: PropertyBag
+    configuration:
+      property1: "jfrog"
+      property2: "pipelines"
+
 pipelines:
   - name: pipe_env_variable_sample
     configuration:
@@ -11,7 +18,11 @@ pipelines:
         configuration:
           environmentVariables:
             step_env_variable: step_value10
+        inputResources:
+          - propertyBag_1
         execution:
           onExecute:
             - echo ${pipe_env_variable}
             - echo ${step_env_variable}
+            - echo ${property1}
+            - echo ${property2}
