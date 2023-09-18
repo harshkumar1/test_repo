@@ -38,9 +38,6 @@ pipelines:
             - name: hk_artifactory
         execution:
           onStart:
-            #- |
-            #    sudo apt-get update
-            #    sudo apt-get install sysstat -y
             -  |
               (while true; do
                 ps -eo pid,pcpu,cmd --sort=-pcpu | head -n 10 >> cpu_usage.log

@@ -1,0 +1,121 @@
+ resources:
+  - name: jfrog_pipeline_repo
+    type: GitRepo
+    configuration:
+      path: harshkumar1/jfrog-pipelines
+      gitProvider: hk_github_sample
+      branches:
+        include: ^main$
+      cloneProtocol: https
+
+pipelines:
+  - name: matrix_two_dimension_pipeline
+      configuration:
+        environmentVariables:
+          readOnly:
+            env1: read_only_env1
+            env2:
+              default: env2_pipe_value2
+              description: This is env2 description
+              values:
+                - env2_pipe_value1
+                - env2_pipe_value2
+                - env2_pipe_value3
+            env3:
+                default: env3_pipe_value3
+                description: This is step_env1 description
+                values:
+                  - env3_pipe_value1
+                  - env3_pipe_value2
+                  - env3_pipe_value3
+                allowCustom: true
+            env4:
+              defaultMultipleValues: ["random_1"]
+              description: "testing"
+              values: ["random_1", "random_2", "random_3", "random_4"]
+              allowCustom: false
+              allowMultipleValues: true
+
+      steps:
+        - name: setup
+          type: PreMatrix
+          configuration:
+            inputResources:
+              - name: matrix_repo
+              - name: cron_trigger_matrix
+          execution:
+            onExecute:
+              - arrayVariable=("cat" "dog" "mouse" "frog")
+              - add_run_variables arrayVariable
+              - singleValueVariable=1
+              - add_run_variables singleValueVariable
+              - echo "Preparing the code base"
+              - pushd "${res_matrix_repo_resourcePath}/app"
+              - npm install
+              - popd
+              - mkdir -p app
+              - cp -r "${res_matrix_repo_resourcePath}/app/." ./app/
+
+        - name: test
+          type: Matrix
+          stepMode: Bash
+          configuration:
+            inputSteps:
+              - name: setup
+          stepletMultipliers:
+            environmentVariables:
+              - module: ${env2} # single value
+              - module: ${env4} # array
+              - module: ${property_bag_id} #value from property bag; would always be a single value
+              - module: ${singleValueVariable}
+              - module: ${arrayVariable}
+            runtimes:
+              - type: image
+                image:
+                  auto:
+                    language: node
+                    versions:
+                      - 12
+              - type: image
+                image:
+                  auto:
+                    language: node
+                    versions:
+                      - 8.17.0
+          execution:
+            onExecute:
+              - pushd ./setup/app
+            onComplete:
+              - save_tests ./setup/app/reports
+        - name: output
+          type: PostMatrix
+          configuration:
+            inputSteps:
+              - name: test
+          execution:
+            onExecute:
+              - echo "Executing the output step"
+        - name: Build_Apk
+          type: Bash
+          configuration:
+            inputResources:
+              - name:  {{ .Values.var.pipelineName }}
+            outputResources:
+              - name: {{ .Values.var.pipelineName }}_build_info
+            integrations:
+              - name: {{ .Values.var.gitProvider }}
+            environmentVariables:
+              brand:
+                default: nbc
+                description: Choose your Brand
+                values:
+                  - nbc
+                  - oxygen
+            onStart:
+              - echo "its working"
+            onSuccess:
+              - echo "Job well done!"
+            onFailure:
+              - echo "uh oh, something went wrong"
+            onComplete:
+              - echo "Cleaning up some stuff"

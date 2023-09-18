@@ -1,0 +1,17 @@
+resources:
+  - name: repo_res
+    type: GitRepo
+    configuration:
+      gitProvider: hk_github
+      path: harshkumar1/test_repo
+
+pipelines:
+  - name: pipe_env_variable_sample
+    configuration:
+      environmentVariables:
+        pipe_env_variable: value1
+    steps:
+      - name: pipe_env_variable
+        execution:
+          onExecute:
+            - echo ${pipe_env_variable}
