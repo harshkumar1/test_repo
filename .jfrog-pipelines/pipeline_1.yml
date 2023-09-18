@@ -13,9 +13,21 @@ pipelines:
           pipe_env_variable: value1
 
     steps:
-      - name: test_step_env_variables
+      - name: step-1
         type: Bash
         configuration:
+          inputResources:
+            - name: test_repo_propertyBag_1
+        execution:
+          onExecute:
+            - echo ${property1}
+            - echo ${property2}
+  
+      - name: step-2
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: step-1
           environmentVariables:
             step_env_variable: step_value10
           outputResources:
@@ -24,7 +36,14 @@ pipelines:
           onExecute:
             - echo ${pipe_env_variable}
             - echo ${step_env_variable}
-            - echo ${property1}
             - write_output test_repo_propertyBag_1 property1="GithubActions"
+
+      - name: step-3
+        type: Bash
+        configuration:
+          inputResources:
+            - name: test_repo_propertyBag_1
+        execution:
+          onExecute:
             - echo ${property1}
             - echo ${property2}
