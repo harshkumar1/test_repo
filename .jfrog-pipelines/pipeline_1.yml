@@ -41,6 +41,8 @@ pipelines:
       - name: step_3
         type: Bash
         configuration:
+          inputSteps:
+            - name: step_2
           inputResources:
             - name: test_repo_propertyBag_1
         execution:
