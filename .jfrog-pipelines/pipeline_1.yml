@@ -4,8 +4,9 @@ pipelines:
       environmentVariables:
         readOnly:
           pipe_env_variable: value1
+
     steps:
-      - name: pipe_env_variable
+      - name: test_step_env_variables
         execution:
           onExecute:
             - echo ${pipe_env_variable}
