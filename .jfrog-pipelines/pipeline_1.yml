@@ -8,6 +8,10 @@ pipelines:
     steps:
       - name: test_step_env_variables
         type: Bash
+        configuration:
+          environmentVariables:
+            step_env_variable: step_value10
         execution:
           onExecute:
             - echo ${pipe_env_variable}
+            - echo ${step_env_variable}
