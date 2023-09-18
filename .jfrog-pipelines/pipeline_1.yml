@@ -13,21 +13,21 @@ pipelines:
           pipe_env_variable: value1
 
     steps:
-      - name: step_1
-        type: Bash
-        configuration:
-          inputResources:
-            - name: test_repo_propertyBag_1
-        execution:
-          onExecute:
-            - echo ${property1}
-            - echo ${property2}
+      # - name: step_1
+      #   type: Bash
+      #   configuration:
+      #     inputResources:
+      #       - name: test_repo_propertyBag_1
+      #   execution:
+      #     onExecute:
+      #       - echo ${property1}
+      #       - echo ${property2}
   
       - name: step_2
         type: Bash
         configuration:
-          inputSteps:
-            - name: step_1
+          # inputSteps:
+          #   - name: step_1
           environmentVariables:
             step_env_variable: step_value10
           outputResources:
