@@ -18,8 +18,8 @@ pipelines:
         configuration:
           environmentVariables:
             step_env_variable: step_value10
-        inputResources:
-          - propertyBag_1
+          inputResources:
+            - propertyBag_1
         execution:
           onExecute:
             - echo ${pipe_env_variable}
