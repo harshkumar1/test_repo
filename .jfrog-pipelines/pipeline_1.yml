@@ -20,6 +20,8 @@ pipelines:
             step_env_variable: step_value10
           inputResources:
             - name: test_repo_propertyBag_1
+          outputResources:
+            - name: test_repo_propertyBag_1
         execution:
           onExecute:
             - echo ${pipe_env_variable}
