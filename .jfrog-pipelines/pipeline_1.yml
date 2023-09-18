@@ -25,4 +25,6 @@ pipelines:
             - echo ${pipe_env_variable}
             - echo ${step_env_variable}
             - echo ${property1}
+            - write_output test_repo_propertyBag_1 property1="GithubActions"
+            - echo ${property1}
             - echo ${property2}
