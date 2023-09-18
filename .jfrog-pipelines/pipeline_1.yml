@@ -43,7 +43,7 @@ pipelines:
             - cd $res_repo_res_resourcePath/
             #- servers=$(jq '.[]' test.json)
             - readarray -t servers_array < <(jq -r '.servers[]' test.json)
-            - add_run_variables servers=${servers_array[@]}
+            - add_run_variables servers=${servers_array}
             - echo ${servers_array[@]}
       - name: step_3
         type: Bash
