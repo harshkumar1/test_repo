@@ -2,7 +2,8 @@ pipelines:
   - name: pipe_env_variable_sample
     configuration:
       environmentVariables:
-        pipe_env_variable: value1
+        readOnly:
+          pipe_env_variable: value1
     steps:
       - name: pipe_env_variable
         execution:
