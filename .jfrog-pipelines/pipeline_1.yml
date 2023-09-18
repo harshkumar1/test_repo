@@ -30,15 +30,18 @@ pipelines:
           #   - name: step_1
           environmentVariables:
             step_env_variable: step_value10
+          inputResources:
+            - name: repo_res
           outputResources:
             - name: test_repo_propertyBag_1
         execution:
           onExecute:
             - echo ${pipe_env_variable}
             - echo ${step_env_variable}
-            - values=("GithubAction" "CircleCI")
+            - values="GithubAction"
             - write_output test_repo_propertyBag_1 property1=${values}
-
+            - cd $res_repo_res_resourcePath/
+            - ls
       - name: step_3
         type: Bash
         configuration:
