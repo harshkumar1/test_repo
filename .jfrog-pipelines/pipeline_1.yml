@@ -42,8 +42,8 @@ pipelines:
             - write_output test_repo_propertyBag_1 property1=${values}
             - cd $res_repo_res_resourcePath/
             - servers=$(jq '.[]' test.json)
-            - add_run_variables servers
-            - echo ${servers}
+            - add_run_variables servers[0]
+            - echo ${servers[0]}
       - name: step_3
         type: Bash
         configuration:
