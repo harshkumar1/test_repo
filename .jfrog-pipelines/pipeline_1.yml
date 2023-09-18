@@ -36,7 +36,7 @@ pipelines:
           onExecute:
             - echo ${pipe_env_variable}
             - echo ${step_env_variable}
-            - values="GithubAction"
+            - values=("GithubAction" "CircleCI")
             - write_output test_repo_propertyBag_1 property1=${values}
 
       - name: step_3
