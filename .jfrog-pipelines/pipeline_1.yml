@@ -41,9 +41,10 @@ pipelines:
             - values="GithubAction"
             - write_output test_repo_propertyBag_1 property1=${values}
             - cd $res_repo_res_resourcePath/
-            - servers=$(jq '.[]' test.json)
-            - add_run_variables servers[0]
-            - echo ${servers[0]}
+            #- servers=$(jq '.[]' test.json)
+            - readarray -t servers_array < <(jq -r '.servers[]' test.json)
+            - add_run_variables ${servers_array[0]}
+            - echo ${servers_array[@]}
       - name: step_3
         type: Bash
         configuration:
