@@ -7,60 +7,85 @@ resources:
 
 pipelines:
   - name: npm_build
-    configuration:
-      inputResources:
-        - name: gitlab_repo_res
+
     steps:
       - name: ESlintScan
         type: Bash
+        configuration:
+          inputResources:
+            - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "ESlintScan"
 
       - name: sonar_scan_col_dev
         type: Bash
+        configuration:
+          inputResources:
+            - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "sonar-scan-col-dev"
 
       - name: Build_Check
         type: Bash
+        configuration:
+          inputResources:
+            - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "Build Check"
 
       - name: DIT_Build
         type: Bash
+        configuration:
+          inputResources:
+            - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "DIT Build"
 
       - name: UAT_Build
         type: Bash
+        configuration:
+          inputResources:
+            - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "UAT Build"
 
       - name: DIT_Deploy1
         type: Bash
+        configuration:
+          inputResources:
+            - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "DIT Deploy1"
 
       - name: UAT_Deploy1
         type: Bash
+        configuration:
+          inputResources:
+            - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "UAT Deploy1"
 
       - name: DIT_Deploy2
         type: Bash
+        configuration:
+          inputResources:
+            - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "DIT Deploy2"
 
       - name: UAT_Deploy2
         type: Bash
+        configuration:
+          inputResources:
+            - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "UAT Deploy2"
