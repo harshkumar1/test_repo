@@ -17,7 +17,7 @@ pipelines:
           onExecute:
             - echo "ESlintScan"
 
-      - name: sonar-scan-col-dev
+      - name: sonar_scan_col_dev
         type: Bash
         execution:
           onExecute:
