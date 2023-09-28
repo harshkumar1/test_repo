@@ -1,0 +1,66 @@
+resources:
+  - name: gitlab_repo_res
+    type: GitRepo
+    configuration:
+      gitProvider: hk_github
+      path: harshkumar1/test_repo
+
+pipelines:
+  - name: npm_build
+    configuration:
+      inputResources:
+        - name: gitlab_repo_res
+    steps:
+      - name: ESlintScan
+        type: Bash
+        execution:
+          onExecute:
+            - echo "ESlintScan"
+
+      - name: sonar-scan-col-dev
+        type: Bash
+        execution:
+          onExecute:
+            - echo "sonar-scan-col-dev"
+
+      - name: Build Check
+        type: Bash
+        execution:
+          onExecute:
+            - echo "Build Check"
+
+      - name: DIT Build
+        type: Bash
+        execution:
+          onExecute:
+            - echo "DIT Build"
+
+      - name: UAT Build
+        type: Bash
+        execution:
+          onExecute:
+            - echo "UAT Build"
+
+      - name: DIT Deploy1
+        type: Bash
+        execution:
+          onExecute:
+            - echo "DIT Deploy1"
+
+      - name: UAT Deploy1
+        type: Bash
+        execution:
+          onExecute:
+            - echo "UAT Deploy1"
+
+      - name: DIT Deploy2
+        type: Bash
+        execution:
+          onExecute:
+            - echo "DIT Deploy2"
+
+      - name: UAT Deploy1
+        type: Bash
+        execution:
+          onExecute:
+            - echo "UAT Deploy1"
