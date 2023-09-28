@@ -59,8 +59,8 @@ pipelines:
           onExecute:
             - echo "DIT Deploy2"
 
-      - name: UAT_Deploy1
+      - name: UAT_Deploy2
         type: Bash
         execution:
           onExecute:
-            - echo "UAT Deploy1"
+            - echo "UAT Deploy2"
