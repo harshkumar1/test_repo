@@ -10,6 +10,7 @@ resources:
          commit: true
          pullRequestCreate: true
 
+pipelines:
   - name: npm_build
     configuration:
       inputResources:
