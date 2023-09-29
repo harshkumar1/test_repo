@@ -18,6 +18,8 @@ pipelines:
     steps:
       - name: ESlintScan
         type: Bash
+        configuration:
+          affinityGroup: npm_install
         execution:
           onExecute:
             - echo "ESlintScan"
@@ -31,6 +33,7 @@ pipelines:
       - name: Build_Check
         type: Bash
         configuration:
+          affinityGroup: npm_install
           inputSteps:
             - name: ESlintScan
               status:
@@ -45,6 +48,7 @@ pipelines:
       - name: DIT_Build
         type: Bash
         configuration:
+          affinityGroup: npm_install
           inputSteps:
             - name: ESlintScan
               status:
@@ -59,6 +63,7 @@ pipelines:
       - name: UAT_Build
         type: Bash
         configuration:
+          affinityGroup: npm_install
           inputSteps:
             - name: ESlintScan
               status:
