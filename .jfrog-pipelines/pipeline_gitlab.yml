@@ -32,6 +32,13 @@ pipelines:
         configuration:
           inputResources:
             - name: gitlab_repo_res
+          inputSteps:
+            - name: ESlintScan
+              status:
+                - success
+            - name: sonar_scan_col_dev
+              status:
+                - success
         execution:
           onExecute:
             - echo "Build Check"
@@ -41,6 +48,13 @@ pipelines:
         configuration:
           inputResources:
             - name: gitlab_repo_res
+          inputSteps:
+            - name: ESlintScan
+              status:
+                - success
+            - name: sonar_scan_col_dev
+              status:
+                - success
         execution:
           onExecute:
             - echo "DIT Build"
@@ -50,6 +64,13 @@ pipelines:
         configuration:
           inputResources:
             - name: gitlab_repo_res
+          inputSteps:
+            - name: ESlintScan
+              status:
+                - success
+            - name: sonar_scan_col_dev
+              status:
+                - success
         execution:
           onExecute:
             - echo "UAT Build"
@@ -59,6 +80,16 @@ pipelines:
         configuration:
           inputResources:
             - name: gitlab_repo_res
+          inputSteps:
+            - name: Build_Check
+              status:
+                - success
+            - name: DIT_Build
+              status:
+                - success
+            - name: UAT_Build
+              status:
+                - success
         execution:
           onExecute:
             - echo "DIT Deploy1"
@@ -68,6 +99,16 @@ pipelines:
         configuration:
           inputResources:
             - name: gitlab_repo_res
+          inputSteps:
+            - name: Build_Check
+              status:
+                - success
+            - name: DIT_Build
+              status:
+                - success
+            - name: UAT_Build
+              status:
+                - success
         execution:
           onExecute:
             - echo "UAT Deploy1"
@@ -77,6 +118,13 @@ pipelines:
         configuration:
           inputResources:
             - name: gitlab_repo_res
+          inputSteps:
+            - name: DIT_Deploy1
+              status:
+                - success
+            - name: UAT_Deploy1
+              status:
+                - success
         execution:
           onExecute:
             - echo "DIT Deploy2"
@@ -86,6 +134,13 @@ pipelines:
         configuration:
           inputResources:
             - name: gitlab_repo_res
+          inputSteps:
+            - name: DIT_Deploy1
+              status:
+                - success
+            - name: UAT_Deploy1
+              status:
+                - success
         execution:
           onExecute:
             - echo "UAT Deploy2"
