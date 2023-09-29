@@ -4,8 +4,12 @@ resources:
     configuration:
       gitProvider: hk_github
       path: harshkumar1/test_repo
+      branches:
+        include: develop*
+      buildOn:
+         commit: true
+         pullRequestCreate: true
 
-pipelines:
   - name: npm_build
     configuration:
       inputResources:
@@ -13,18 +17,12 @@ pipelines:
     steps:
       - name: ESlintScan
         type: Bash
-        # configuration:
-        #   inputResources:
-        #     - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "ESlintScan"
 
       - name: sonar_scan_col_dev
         type: Bash
-        # configuration:
-        #   inputResources:
-        #     - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "sonar-scan-col-dev"
@@ -32,8 +30,6 @@ pipelines:
       - name: Build_Check
         type: Bash
         configuration:
-          # inputResources:
-          #   - name: gitlab_repo_res
           inputSteps:
             - name: ESlintScan
               status:
@@ -48,8 +44,6 @@ pipelines:
       - name: DIT_Build
         type: Bash
         configuration:
-          # inputResources:
-          #   - name: gitlab_repo_res
           inputSteps:
             - name: ESlintScan
               status:
@@ -64,8 +58,6 @@ pipelines:
       - name: UAT_Build
         type: Bash
         configuration:
-          # inputResources:
-          #   - name: gitlab_repo_res
           inputSteps:
             - name: ESlintScan
               status:
@@ -80,8 +72,6 @@ pipelines:
       - name: DIT_Deploy1
         type: Bash
         configuration:
-          # inputResources:
-          #   - name: gitlab_repo_res
           inputSteps:
             - name: Build_Check
               status:
@@ -99,8 +89,6 @@ pipelines:
       - name: UAT_Deploy1
         type: Bash
         configuration:
-          # inputResources:
-          #   - name: gitlab_repo_res
           inputSteps:
             - name: Build_Check
               status:
@@ -118,8 +106,6 @@ pipelines:
       - name: DIT_Deploy2
         type: Bash
         configuration:
-          # inputResources:
-          #   - name: gitlab_repo_res
           inputSteps:
             - name: DIT_Deploy1
               status:
@@ -134,8 +120,6 @@ pipelines:
       - name: UAT_Deploy2
         type: Bash
         configuration:
-          # inputResources:
-          #   - name: gitlab_repo_res
           inputSteps:
             - name: DIT_Deploy1
               status:
