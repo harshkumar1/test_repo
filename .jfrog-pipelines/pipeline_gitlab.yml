@@ -7,7 +7,9 @@ resources:
 
 pipelines:
   - name: npm_build
-
+    configuration:
+      inputResources:
+        - name: gitlab_repo_res
     steps:
       - name: ESlintScan
         type: Bash
@@ -30,8 +32,8 @@ pipelines:
       - name: Build_Check
         type: Bash
         configuration:
-          inputResources:
-            - name: gitlab_repo_res
+          # inputResources:
+          #   - name: gitlab_repo_res
           inputSteps:
             - name: ESlintScan
               status:
@@ -46,8 +48,8 @@ pipelines:
       - name: DIT_Build
         type: Bash
         configuration:
-          inputResources:
-            - name: gitlab_repo_res
+          # inputResources:
+          #   - name: gitlab_repo_res
           inputSteps:
             - name: ESlintScan
               status:
@@ -62,8 +64,8 @@ pipelines:
       - name: UAT_Build
         type: Bash
         configuration:
-          inputResources:
-            - name: gitlab_repo_res
+          # inputResources:
+          #   - name: gitlab_repo_res
           inputSteps:
             - name: ESlintScan
               status:
@@ -78,8 +80,8 @@ pipelines:
       - name: DIT_Deploy1
         type: Bash
         configuration:
-          inputResources:
-            - name: gitlab_repo_res
+          # inputResources:
+          #   - name: gitlab_repo_res
           inputSteps:
             - name: Build_Check
               status:
@@ -97,8 +99,8 @@ pipelines:
       - name: UAT_Deploy1
         type: Bash
         configuration:
-          inputResources:
-            - name: gitlab_repo_res
+          # inputResources:
+          #   - name: gitlab_repo_res
           inputSteps:
             - name: Build_Check
               status:
@@ -116,8 +118,8 @@ pipelines:
       - name: DIT_Deploy2
         type: Bash
         configuration:
-          inputResources:
-            - name: gitlab_repo_res
+          # inputResources:
+          #   - name: gitlab_repo_res
           inputSteps:
             - name: DIT_Deploy1
               status:
@@ -132,8 +134,8 @@ pipelines:
       - name: UAT_Deploy2
         type: Bash
         configuration:
-          inputResources:
-            - name: gitlab_repo_res
+          # inputResources:
+          #   - name: gitlab_repo_res
           inputSteps:
             - name: DIT_Deploy1
               status:
