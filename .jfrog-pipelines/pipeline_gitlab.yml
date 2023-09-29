@@ -13,18 +13,18 @@ pipelines:
     steps:
       - name: ESlintScan
         type: Bash
-        configuration:
-          inputResources:
-            - name: gitlab_repo_res
+        # configuration:
+        #   inputResources:
+        #     - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "ESlintScan"
 
       - name: sonar_scan_col_dev
         type: Bash
-        configuration:
-          inputResources:
-            - name: gitlab_repo_res
+        # configuration:
+        #   inputResources:
+        #     - name: gitlab_repo_res
         execution:
           onExecute:
             - echo "sonar-scan-col-dev"
